@@ -1,0 +1,25 @@
+# Credentials — never commit
+.zshrc
+*.env
+.env.*
+
+# Browser cookies for paywalled sites
+resources/cookies/
+
+# Claude Code ephemeral state
+.claude/scheduled_tasks.lock
+.claude/scheduled_tasks.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Backup files
+*.txt.bak
+*.bak

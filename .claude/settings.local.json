@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:feeds.bbci.co.uk)",
+      "WebFetch(domain:www.aljazeera.com)",
+      "WebFetch(domain:feeds.content.dowjones.io)",
+      "WebFetch(domain:foreignpolicy.com)",
+      "WebFetch(domain:www.brookings.edu)",
+      "WebFetch(domain:www.csis.org)",
+      "WebFetch(domain:www.scmp.com)",
+      "WebFetch(domain:asia.nikkei.com)"
+    ]
+  }
+}

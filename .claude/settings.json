@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Write",
+      "Edit",
+      "WebFetch",
+      "WebSearch",
+      "ToolSearch",
+      "Bash(source ~/.zshrc*)",
+      "Bash(curl -s *)",
+      "Bash(python3 ~/scripts/send_morning_brief.py *)"
+    ]
+  }
+}
