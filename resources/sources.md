@@ -20,7 +20,7 @@ These outlets provide subscriber-authenticated RSS feeds with full or extended a
 | Brookings (Intl Affairs) | 2 | `https://www.brookings.edu/topic/international-affairs/feed/` | Confirmed working Apr 2026 |
 | BBC World | 2 | `https://feeds.bbci.co.uk/news/world/rss.xml` | Open RSS |
 | Al Jazeera | 2 | `https://www.aljazeera.com/xml/rss/all.xml` | Open RSS |
-| SCMP | 3 | `http://www.scmp.com/rss/91/feed/` | Open RSS (note: http not https) |
+| SCMP | 3 | `https://www.scmp.com/rss/91/feed` | Open RSS |
 | Nikkei Asia | 3 | `https://asia.nikkei.com/rss/feed/nar` | Open RSS; pubDate sometimes absent — use fetch time |
 
 --
@@ -29,15 +29,17 @@ These outlets provide subscriber-authenticated RSS feeds with full or extended a
 Use `Bash curl` (not WebFetch — api.nytimes.com is blocked by WebFetch) with the URL below, substituting `[TOPIC]` and the API key env var. Run once per topic bucket. Combine and deduplicate results by `web_url` before adding to working list.
 
 **Endpoint:** `https://api.nytimes.com/svc/search/v2/articlesearch.json`  
-**Env var required:** `NYT_API_KEY` (set in ~/.zshrc — see paywall-setup.md §2)
+**Env var required:** `NYT_API_KEY` (set in ~/.zshrc — see paywall-setup.md §2)  
+**Note:** The `fq=section_name` filter is broken as of May 2026 (returns 0 results regardless of syntax). Use `begin_date` for 24-hour scoping instead.
 
 | Topic bucket | Query string |
 |---|---|
-| GEOPOLITICS | `q=geopolitics defense military sanctions&fq=section_name:("World" "Politics")&sort=newest` |
-| ENERGY | `q=oil gas energy minerals OPEC LNG&fq=section_name:("Business" "World")&sort=newest` |
-| MARKETS | `q=Federal Reserve central bank inflation GDP markets&fq=section_name:("Business" "Economy")&sort=newest` |
-| EM | `q=China India Brazil emerging markets&fq=section_name:("World" "Business")&sort=newest` |
+| GEOPOLITICS | `q=geopolitics+defense+military+sanctions+conflict&sort=newest&begin_date=YESTERDAY_YYYYMMDD` |
+| ENERGY | `q=oil+gas+energy+minerals+OPEC+LNG+pipeline&sort=newest&begin_date=YESTERDAY_YYYYMMDD` |
+| MARKETS | `q=Federal+Reserve+central+bank+inflation+GDP+markets&sort=newest&begin_date=YESTERDAY_YYYYMMDD` |
+| EM | `q=China+India+Brazil+emerging+markets+sovereign&sort=newest&begin_date=YESTERDAY_YYYYMMDD` |
 
+Replace `YESTERDAY_YYYYMMDD` with yesterday's date in YYYYMMDD format (e.g. `20260505`).  
 Append `&api-key=$NYT_API_KEY` to each query. Extract from `response.docs[]`: `headline.main`, `web_url`, `pub_date`, `abstract`, `lead_paragraph`.
 
 ---

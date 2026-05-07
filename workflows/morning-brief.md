@@ -94,7 +94,7 @@ Run four separate API calls — one per topic — using the endpoint and query p
 Run each of the four topic queries using this exact pattern:
 
 ```bash
-source ~/.zshrc && curl -s "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=[QUERY]&fq=section_name:(\"World\"+\"Business\")&sort=newest&api-key=$NYT_API_KEY" | python3 -c "
+source ~/.zshrc && YESTERDAY_DATE=$(date -v-1d +%Y%m%d) && curl -s "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=[QUERY]&sort=newest&begin_date=$YESTERDAY_DATE&api-key=$NYT_API_KEY" | python3 -c "
 import json,sys
 raw = sys.stdin.read()
 data = json.loads(raw)
